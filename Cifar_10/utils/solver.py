@@ -6,7 +6,7 @@ import torch
 from utils.serilization import save_checkpoint
 
 
-class sover(object):
+class solver(object):
     def __init__(self,model, use_gpu):
         self.net = model
         self.use_gpu = use_gpu
@@ -14,7 +14,7 @@ class sover(object):
         self.acc_sum  = AverageValueMeter()
 
     def net_trian(self, train_data, valid_data, optimizer, criterion, num_epochs=100, print_interval=100,
-                  eval_step=50, save_step=10, save_dir='checkpoints'):
+                  eval_step=50, save_step=10, save_model_dir='checkpoints'):
         best_valid_acc = -np.inf
 
         for epoch in range(num_epochs):
@@ -45,10 +45,12 @@ class sover(object):
                                  % (epoch, i+1, train_data.batch_size * print_interval / (time.time() - btic),
                                      loss_mean, acc_mean)
                                  )
+                    '''
                     print('Epoch[%d] Batch [%d]\t Speed: %f samples/sec\t loss=%f\t'
                           'acc=%f'% (epoch, i+1, train_data.batch_size * print_interval / (time.time() - btic),
                                      loss_mean, acc_mean)
                           )
+                    '''
         loss_mean = self.loss_sum.value()[0]
         acc_mean  = self.acc_sum.value()[0]
         throughput = int(train_data.batch_size * len(train_data) / (time.time() - tic))
@@ -71,7 +73,7 @@ class sover(object):
             save_checkpoint({
                 'state_dict':state_dict,
                 'epoch':epoch + 1
-            }, is_best=is_best, save_dir=save_dir,
+            }, is_best=is_best, save_dir=save_model_dir,
             filename='model.pth.tar')
 
     def valid_test(self, valid_data) -> float:

@@ -57,7 +57,7 @@ class BasicBlock(nn.Module):
 # ResNet18除了第一块的每个块的第一层的stride为2，非第一层为1
 # 第一块的stride为1
 class ResNet18(nn.Module):
-    def __init__(self, num_class):
+    def __init__(self, num_class=10):
         super(ResNet18, self).__init__()
         self.inplanes = 16
         self.avg_pool =  nn.AdaptiveAvgPool2d((1,1))

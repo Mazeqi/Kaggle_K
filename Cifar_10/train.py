@@ -1,6 +1,5 @@
 import sys
 import argparse
-from torch.backends import cudnn
 from utils.loader import get_data_provider
 from torch import optim
 from torch import nn

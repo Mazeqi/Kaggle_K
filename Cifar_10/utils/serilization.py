@@ -13,7 +13,7 @@ def mkdir_if_missing(dir_path):
 
 
 def save_checkpoint(state, is_best, save_dir, filename='checkpoint.pth.tar'):
-    fpath = '_'.join(str(state['epoch']), filename)
+    fpath = '_'.join((str(state['epoch']), filename))
     fpath = os.path.join(save_dir, fpath)
     mkdir_if_missing(save_dir)
     torch.save(state, fpath)

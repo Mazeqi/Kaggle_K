@@ -1,1 +1,1 @@
-from network import ResNet
+from network.ResNet import ResNet18

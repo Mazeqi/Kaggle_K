@@ -1,12 +1,16 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas_profiling
 
 plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
 plt.rcParams['axes.unicode_minus']=False #用来正常显示负号
 
-data_train = pd.read_csv('../Datasets/titanic/train.csv')
-data_test  = pd.read_csv('../Datasets/titanic/test.csv')
+data_train = pd.read_csv('../../DataSets/titanic/train.csv')
+data_test  = pd.read_csv('../../DataSets/titanic/test.csv')
+profile=data_train.profile_report(title='Titanic Dataset')
+profile.to_file(output_file='titanic_report.html')
+
 
 # 利用pd返回数据的信息
 # print(train_data.info())
@@ -92,7 +96,7 @@ plt.xlabel(u"性别")
 plt.ylabel(u"人数")
 plt.show()
 
-'''
+
 
 # 然后我们再来看看各种舱级别情况下各性别的获救情况
 fig=plt.figure()
@@ -120,3 +124,4 @@ ax4.set_xticklabels([u"未获救", u"获救"], rotation=0)
 plt.legend([u"男性/低级舱"], loc='best')
 
 plt.show()
+'''
